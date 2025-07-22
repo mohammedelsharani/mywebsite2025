@@ -1,0 +1,21 @@
+---
+- hosts: localhost
+  become: true
+  name: Install Jenkins, Java and Docker on Master
+  tasks:
+    - name: Run Jenkins installation script
+      script: jenkins.sh
+
+- hosts: test  # Must match inventory exactly
+  become: true
+  name: Install Java and Docker on Test Server
+  tasks:
+    - name: Run Docker installation script
+      script: docker.sh
+
+- hosts: prod  # Must match inventory exactly
+  become: true
+  name: Install Java and Docker on Production
+  tasks:
+    - name: Run Docker installation script
+      script: docker.sh  # Removed the trailing dot
